@@ -2,6 +2,10 @@ table, thead, td {
     border: 1px solid;
 }
 
+table {
+    margin: 25px;
+}
+
 thead {
     text-align: center;
     font-weight: bold;

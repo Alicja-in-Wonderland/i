@@ -17,6 +17,7 @@
                 <td>Business Logic</td>
                 <td>URL</td>
                 <td>HTTP Method</td>
+                <td>Query Parameters</td>
                 <td>Request Body Data Format</td>
                 <td>Response Body Data Format</td>
             </tr>
@@ -28,6 +29,7 @@
                 <td>/movies</td>
                 <td>GET</td>
                 <td>-</td>
+                <td>-</td>
                 <td>A JSON object holding data about all movies</td>
             </tr>
 
@@ -35,6 +37,7 @@
                 <td>Returns data about a single movie by title</td>
                 <td>/movies/:Title</td>
                 <td>GET</td>
+                <td>:Title</td>
                 <td>-</td>
                 <td>A JSON object holding data about a single movie</td>
             </tr>
@@ -43,6 +46,7 @@
                 <td>Returns data about genre by title</td>
                 <td>/movies/genre/:Name</td>
                 <td>GET</td>
+                <td>:genreName</td>
                 <td>-</td>
                 <td>A JSON object holding data about a specific movie genre</td>
             </tr>
@@ -51,6 +55,7 @@
                 <td>Returns data about a director by name</td>
                 <td>/movies/director/:Name</td>
                 <td>GET</td>
+                <td>:directorName</td>
                 <td>-</td>
                 <td>A JSON object holding data about a specific director</td>
             </tr>
@@ -59,6 +64,7 @@
                 <td>Allows new users to register</td>
                 <td>/users</td>
                 <td>POST</td>
+                <td>-</td>
                 <td>A JSON object holding data about the user to add, structured as: { "Username": "String","Password": "String","Email": "String","Birthday": "Date" }</td>
                 <td>A JSON object holding data about the user that was added, structured as: { "Username" : "Name1", "Password": "abcd", "Email": "example@gmail.com", "Birthday": "1990-05-01", "Favourite Movie" : [] }</td>
             </tr>
@@ -67,6 +73,7 @@
                 <td>Allows users to update their user info</td>
                 <td>/users/:Username</td>
                 <td>PUT</td>
+                <td>:Username</td>
                 <td>-</td>
                 <td>A JSON object holding data about the updated user information</td>
             </tr>
@@ -75,6 +82,9 @@
                 <td>Allows users to add a movie to their list of favourites</td>
                 <td>/users/:Username/movies/:MovieID</td>
                 <td>POST</td>
+                <td>:Username
+                    :MovieID
+                </td>
                 <td>-</td>
                 <td>A JSON object holding data about the user and the movie that was added to favourites</td>
             </tr>
@@ -83,6 +93,9 @@
                 <td>Allows users to remove a movie from their list of favourites</td>
                 <td>/users/:Usermame/movies/:MovieID</td>
                 <td>DELETE</td>
+                <td>:Username
+                    :MovieID
+                </td>
                 <td>-</td>
                 <td>A JSON object holding data about the user and the movie that was removed from favourites</td>
             </tr>
@@ -91,6 +104,7 @@
                 <td>Allows existing users to deregister</td>
                 <td>/users/:Username</td>
                 <td>DELETE</td>
+                <td>:Username</td>
                 <td>-</td>
                 <td>A text message indicating whether the user has successfully deregistered</td>
             </tr>
