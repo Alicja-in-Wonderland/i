@@ -1,0 +1,12 @@
+table, thead, td {
+    border: 1px solid;
+}
+
+thead {
+    text-align: center;
+    font-weight: bold;
+}
+
+td {
+    padding: 15px;
+}
