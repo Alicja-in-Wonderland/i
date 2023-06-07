@@ -3,10 +3,16 @@ const express = require('express'),
    uuid = require('uuid'),
    morgan = require('morgan'),
    fs = require('fs'),
-   path = require('path');
+   path = require('path'),
+   mongoose = require('mongoose'),
+   Models = require('./models.js'),
+   Movies = Models.Movie,
+   Users = Models.User;
 
 const app = express();
 app.use(bodyParser.json());
+
+mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
 
 //create a write stream (in append mode)
 const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {flags: 'a'})
