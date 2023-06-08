@@ -33,7 +33,14 @@ app.get('/documentation', (req, res) => {
 
 //Return a list of all movies to the user
 app.get('/movies', (req, res) => {
-    res.status(200).json(movies);
+    Movies.find()
+    .then((movies) => {
+        res.status(201).json(movies);
+    })
+    .catch((error) => {
+        console.error(err);
+        res.status(500).send('Error: ' + err);
+    });
 });
 
 //Return data about a single movie by title
