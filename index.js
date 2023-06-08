@@ -115,21 +115,25 @@ app.post('/users', (req, res) => {
 });
 
 //Allow users to update their user info
-app.put('/users/:id', (req, res) => {
-    const { id } = req.params;
-    const updatedUser = req.body;
-
-    let user = users.find( user => user.id == id );
-
-    if (user) {
-        user.name = updatedUser.name;
-        res.status(200).json(user);
-    } else {
-        res.status(400).send('no such user')
-    }
+app.put('/users/:Username', (req, res) => {
+    Users.findOneAndUpdate({ Username: req.params.Username }, { $set:
+        {
+            Username: req.body.Username,
+            Password: req.body.Password,
+            Email: req.body.Email,
+            Birthday: req.body.Birthday
+        }
+    },
+    { new: true }).then(
+        (updatedUser) => {res.json(updatedUser);},
+        (err) => {
+            console.error(err);
+            res.status(500).send('Error: ' + err);
+        }
+    );
 });
 
-//Allow users to add a movie to their list of favorites
+//Allow users to add a movie to their list of favourites
 app.post('/users/:id/:movieTitle', (req, res) => {
     const { id, movieTitle } = req.params;
 
