@@ -134,20 +134,20 @@ app.put('/users/:Username', (req, res) => {
 });
 
 //Allow users to add a movie to their list of favourites
-app.post('/users/:id/:movieTitle', (req, res) => {
-    const { id, movieTitle } = req.params;
-
-    let user = users.find( user => user.id == id );
-
-    if (user) {
-        user.favouriteMovies.push(movieTitle);
-        res.status(200).send(`${movieTitle} has been added to user ${id}'s array`);
-    } else {
-        res.status(400).send('no such user')
-    }
+app.post('/users/:Username/movies/:MovieID', (req, res) => {
+    Users.findOneAndUpdate({ Username: req.params.Username }, {
+        $push: { Favourites: req.params.MovieID }
+    },
+    { new: true }).then(
+        (updatedUser) => {res.json(updatedUser);},
+        (err) => {
+            console.error(err);
+            res.status(500).send('Error: ' + err);
+        }
+    );
 });
 
-//Allow users to remove a movie from their list of favorites
+//Allow users to remove a movie from their list of favourites
 app.delete('/users/:id/:movieTitle', (req, res) => {
     const { id, movieTitle } = req.params;
 
