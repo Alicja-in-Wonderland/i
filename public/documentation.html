@@ -38,26 +38,48 @@
                 <td>/movies/:Title</td>
                 <td>GET</td>
                 <td>:Title</td>
-                <td>-</td>
-                <td>A JSON object holding data about a single movie</td>
+                <td>
+                    Replace the <code>/:Title</code> with the title of the movie you would like to look up.<br>
+                    <br>Example:<br>
+                    <br><code>http://localhost:8080/movies/TheMovie</code>
+                </td>
+                <td>A JSON object holding data about a single movie.</td>
             </tr>
             
             <tr>
-                <td>Returns data about genre by title</td>
-                <td>/movies/genre/:Name</td>
+                <td>Returns data about genre by its name</td>
+                <td>/movies/genre/:Genre</td>
                 <td>GET</td>
-                <td>:genreName</td>
-                <td>-</td>
-                <td>A JSON object holding data about a specific movie genre</td>
+                <td>:Genre</td>
+                <td>
+                    Replace the <code>/:Genre</code> with the name of the specific genre you would like to look up.<br>
+                    <br>Example:<br>
+                    <br><code>http://localhost:8080/movies/genre/Comedy</code><br>
+                </td>
+                <td>A JSON object holding data about a specific movie genre as follows:<br>
+                    <br><code>"Comedy is a genre of film in which the main emphasis is on humour. These films are designed to make the viewers laugh."</code>
+                </td>
             </tr>
 
             <tr>
                 <td>Returns data about a director by name</td>
-                <td>/movies/director/:Name</td>
+                <td>/movies/directors/:Director</td>
                 <td>GET</td>
-                <td>:directorName</td>
-                <td>-</td>
-                <td>A JSON object holding data about a specific director</td>
+                <td>:Director</td>
+                <td>
+                    Replace the <code>/:Director</code> with the name of the specific director you would like to look up.<br>
+                    <br>Example:<br>
+                    <br><code>http://localhost:8080/movies/directors/Frank%20Darabont</code>
+                </td>
+                <td>A JSON object holding data about a specific director according to the following structure:<br>
+                    <code>
+                        {<br>
+                          "Name": "Frank Darabont",<br>
+                          "Bio": "Frank Árpád Darabont is a French-born American film director, screenwriter and producer.",<br>
+                          "Birth": "1959"<br>
+                        }
+                    </code><br>
+                </td>
             </tr>
 
             <tr>
@@ -65,8 +87,30 @@
                 <td>/users</td>
                 <td>POST</td>
                 <td>-</td>
-                <td>A JSON object holding data about the user to add, structured as: { "Username": "String","Password": "String","Email": "String","Birthday": "Date" }</td>
-                <td>A JSON object holding data about the user that was added, structured as: { "Username" : "Name1", "Password": "abcd", "Email": "example@gmail.com", "Birthday": "1990-05-01", "Favourite Movie" : [] }</td>
+                <td>A JSON object holding data about the user to add, structured as:<br>
+                    <br>Example:<br>
+                    <code>
+                        {<br>
+                          "Username": "Name1",<br>
+                          "Password": "abcd",<br>
+                          "Email": "example@gmail.com",<br>
+                          "Birthday": "1990-05-01"<br>
+                        }
+                    </code><br>
+                </td>
+                <td>A JSON object holding data about the user that was added, structured as:<br>
+                    <br>Example:<br>
+                    <code>
+                        {<br>
+                          "_id": "1234567890",<br>
+                          "Username": "Name1",<br>
+                          "Password": "abcd",<br>
+                          "Email": "example@gmail.com",<br>
+                          "Birthday": "1990-05-01",<br>
+                          "Favourites": []<br>
+                        }
+                    </code><br>
+                </td>
             </tr>
 
             <tr>
@@ -74,8 +118,28 @@
                 <td>/users/:Username</td>
                 <td>PUT</td>
                 <td>:Username</td>
-                <td>-</td>
-                <td>A JSON object holding data about the updated user information</td>
+                <td>A JSON object holding data about the updated user information according to the following strucure:<br>
+                    <code><br>
+                        {<br>
+                            "Username": "Name2",<br>
+					        "Password": "abcd",<br>
+					        "Email": "example@gmail.com",<br>
+					        "Birthday": "1990-05-01"<br>
+                        }
+                    </code><br>
+                </td>
+                <td>A JSON object holding data about the updated user information according to the following strucure:<br>
+                    <code><br>
+                        {<br>
+                            "_id": "1234567890",<br>
+                            "Username": "Name2",<br>
+					        "Password": "abcd",<br>
+					        "Email": "example@gmail.com",<br>
+					        "Birthday": "1990-05-01"<br>
+                            "Favourites": []<br>
+                        }
+                    </code><br>
+                </td>
             </tr>
 
             <tr>
@@ -85,8 +149,22 @@
                 <td>:Username
                     :MovieID
                 </td>
-                <td>-</td>
-                <td>A JSON object holding data about the user and the movie that was added to favourites</td>
+                <td>Replace the <code>/:MovieID</code> with the ObjectID of the specific movie you would like to add to favourites.<br>
+                    <br>Example:<br>
+                    <br><code>http://localhost:8080/users/Name2/movies/987654321</code>
+                </td>
+                <td>A JSON object holding data about the user and the movie that was added to favourites according to the following strucutre:<br>
+                    <code><br>
+                        {<br>
+                            "_id": "1234567890",<br>
+                            "Username": "Name2",<br>
+					        "Password": "abcd",<br>
+					        "Email": "example@gmail.com",<br>
+					        "Birthday": "1990-05-01"<br>
+                            "Favourites": ["987654321"]<br>
+                        }
+                    </code><br>
+                </td>
             </tr>
 
             <tr>
@@ -96,8 +174,23 @@
                 <td>:Username
                     :MovieID
                 </td>
-                <td>-</td>
-                <td>A JSON object holding data about the user and the movie that was removed from favourites</td>
+                <td>
+                    Replace the <code>/:MovieID</code> with the ObjectID of the specific movie you would like to remove from favourites.<br>
+                    <br>Example:<br>
+                    <br><code>http://localhost:8080/users/Name2/movies/987654321</code>
+                </td>
+                <td>A JSON object holding data about the user without the deleted movie, structured as follows:<br>
+                    <code><br>
+                        {<br>
+                            "_id": "1234567890",<br>
+                            "Username": "Name2",<br>
+					        "Password": "abcd",<br>
+					        "Email": "example@gmail.com",<br>
+					        "Birthday": "1990-05-01"<br>
+                            "Favourites": []<br>
+                        }
+                    </code><br>
+                </td>
             </tr>
 
             <tr>
@@ -105,8 +198,14 @@
                 <td>/users/:Username</td>
                 <td>DELETE</td>
                 <td>:Username</td>
-                <td>-</td>
-                <td>A text message indicating whether the user has successfully deregistered</td>
+                <td>
+                    Replace the <code>/:Username</code> with the Username of the specific user you would like to deregister.<br>
+                    <br>Example:<br>
+                    <br><code>http://localhost:8080/users/Name2</code>
+                </td>
+                <td>A text message indicating whether the user has successfully deregistered. Structured as follows:<br>
+                    <br><code>Name2 was deleted.</code>
+                </td>
             </tr>
 
         </tbody>
