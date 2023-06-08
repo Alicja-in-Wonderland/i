@@ -65,3 +65,4 @@
 ::1 - - [08/Jun/2023:18:20:59 +0000] "POST /users/UpdatedTestUser42/movies/647e2e749726b3d41dfb6736 HTTP/1.1" 200 199 "-" "PostmanRuntime/7.32.2"
 ::1 - - [08/Jun/2023:18:22:54 +0000] "POST /users/UpdatedTestUser42/movies/647e2e749726b3d41dfb6736 HTTP/1.1" 200 225 "-" "PostmanRuntime/7.32.2"
 ::1 - - [08/Jun/2023:18:49:05 +0000] "DELETE /users/UpdatedTestUser42/movies/647e2e749726b3d41dfb6736 HTTP/1.1" 200 199 "-" "PostmanRuntime/7.32.2"
+::1 - - [08/Jun/2023:18:58:24 +0000] "DELETE /users/UpdatedTestUser42 HTTP/1.1" 200 30 "-" "PostmanRuntime/7.32.2"
