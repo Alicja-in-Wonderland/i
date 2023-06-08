@@ -44,15 +44,15 @@ app.get('/movies', (req, res) => {
 });
 
 //Return data about a single movie by title
-app.get('/movies/:title', (req, res) => {
-    const { title } = req.params;
-    const movie = movies.find( movie => movie.Title === title );
-
-    if (movie) {
-        res.status(200).json(movie);
-    } else {
-        res.status(400).send('no such movie')
-    }
+app.get('/movies/:Title', (req, res) => {
+    Movies.findOne({ Title: req.params.Title })
+    .then((movie) => {
+        res.json(movie);
+    })
+    .catch((err) => {
+        console.error(err);
+        res.status(500).send('Error: ' + err);
+    });
 });
 
 //Return data about a genre by title
