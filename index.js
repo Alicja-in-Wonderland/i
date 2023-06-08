@@ -55,16 +55,20 @@ app.get('/movies/:Title', (req, res) => {
     });
 });
 
-//Return data about a genre by title
-app.get('/movies/genre/:genreName', (req, res) => {
-    const { genreName } = req.params;
-    const genre = movies.find( movie => movie.Genre.Name === genreName ).Genre;
-
-    if (genre) {
-        res.status(200).json(genre);
-    } else {
-        res.status(400).send('no such genre')
-    }
+//Return data about a genre by name
+app.get('/movies/genre/:Genre', (req, res) => {
+    Movies.findOne({ 'Genre.Name': req.params.Genre })
+    .then((movie) => {
+        if (!movie) {
+            return res.status(404).send('Error: ' + req.params.Genre + ' was not found.');
+        } else {
+            res.json(movie.Genre.Description);
+        }
+    })
+    .catch((err) => {
+        console.error(err);
+        res.status(500).send('Error: ' + err);
+    });
 });
 
 //Return data about a director by name
