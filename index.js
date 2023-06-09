@@ -15,6 +15,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
 
+let auth = require('./auth')(app);
+const passport = require('passport');
+require('./passport');
+
 //create a write stream (in append mode)
 const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {flags: 'a'})
 
