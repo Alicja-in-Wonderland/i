@@ -12,19 +12,16 @@ const passport = require('passport'),
     passwordField: 'Password'
   }, (username, password, callback) => {
     console.log(username + ' ' + password);
-    Users.findOne({ Username: username }, (error, user) => {
-        if (error) {
-            console.log(error);
-            return callback(error);
-        }
-
+    Users.findOne({ Username: username }).then((user) => {
         if (!user) {
             console.log('incorrect username');
             return callback(null, false, {messsge: 'Incorrect username or password.'});
         }
-
         console.log('finished');
         return callback(null, user);
+    }).catch((error) => {
+        console.log(error);
+        return callback(error);
     });
   }));
 
