@@ -175,3 +175,5 @@
 ::1 - - [09/Jun/2023:15:29:11 +0000] "PUT /users/newuser1 HTTP/1.1" 200 175 "-" "PostmanRuntime/7.32.2"
 ::1 - - [09/Jun/2023:15:30:39 +0000] "POST /users/newuser1updated/movies/647e2e749726b3d41dfb6736 HTTP/1.1" 200 201 "-" "PostmanRuntime/7.32.2"
 ::1 - - [09/Jun/2023:15:32:15 +0000] "DELETE /users/newuser1updated/movies/647e2e749726b3d41dfb6736 HTTP/1.1" 200 175 "-" "PostmanRuntime/7.32.2"
+::1 - - [11/Jun/2023:18:27:41 +0000] "DELETE /users/newuser1updated HTTP/1.1" 200 28 "-" "PostmanRuntime/7.32.2"
+::1 - - [11/Jun/2023:18:30:57 +0000] "POST /users/ HTTP/1.1" 201 220 "-" "PostmanRuntime/7.32.2"
