@@ -9,6 +9,8 @@ const express = require('express'),
    Movies = Models.Movie,
    Users = Models.User;
 
+const { check, validationResult } = require('express-validator');
+
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -95,7 +97,22 @@ app.get('/movies/directors/:Director', passport.authenticate('jwt', {session: fa
 });
 
 //Add a new user
-app.post('/users', (req, res) => {
+app.post('/users', 
+//Validation added
+[ 
+    check('Username', 'Username requires min. 5 characters.').isLength({min: 5}),
+    check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
+    check('Password', 'Password is required.').not().isEmpty(),
+    check('Email', 'Email does not appear to be valid.').isEmail()
+], (req, res) => {
+
+    //check the validation object for errors
+    let errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        return res.status(422).json({ errors: errors.array( )});
+    }
+
     let hashedPassword = Users.hashPassword(req.body.Password);
     Users.findOne({ Username: req.body.Username })
     .then((user) => {
@@ -123,7 +140,22 @@ app.post('/users', (req, res) => {
 });
 
 //Allow users to update their user info
-app.put('/users/:Username', passport.authenticate('jwt', {session: false}), (req, res) => {
+app.put('/users/:Username', 
+//Validation added
+[ 
+    check('Username', 'Username is required').isLength({min: 5}),
+    check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
+    check('Password', 'Password is required.').not().isEmpty(),
+    check('Email', 'Email does not appear to be valid.').isEmail()
+], 
+passport.authenticate('jwt', {session: false}), (req, res) => {
+    //check the validation object for errors
+    let errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        return res.status(422).json({ errors: errors.array( )});
+    }
+
     Users.findOneAndUpdate({ Username: req.params.Username }, { $set:
         {
             Username: req.body.Username,
