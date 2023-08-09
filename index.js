@@ -15,8 +15,23 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+//App uses CORS, set to allow requests from all origins
 const cors = require('cors');
 app.use(cors());
+
+//Only allows a specific set of origins to access the API
+/*let allowedOrigins = ['http://localhost:8080', 'http://localhost:1234', 'https://my-f1ix.netlify.app'];
+
+app.use(cors({
+    origin: (origin, callback) => {
+        if (!origin) return callback(null, true);
+        if (allowedOrigins.indexOf(origin) === -1) { // If a specific origin isn’t found on the list of allowed origins
+            let message = 'The CORS policy for this application doesn’t allow access from origin ' + origin;
+            return callback(new Error(message), false);
+        }
+        return callback(null, true);
+    }
+})); */
 
 let auth = require('./auth.js')(app);
 const passport = require('passport');
