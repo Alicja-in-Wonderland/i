@@ -1,20 +1,34 @@
 const jwtSecret = 'your_jwt_secret';
 
 const jwt = require('jsonwebtoken'),
- passport = require('passport');
+    passport = require('passport');
 
- require('./passport');
+require('./passport');
 
- let generateJWTToken = (user) => {
+/**
+* 
+* @param {*} user 
+* @returns 
+* This function takes the user object and creates a JWT using the sign() method.
+* The first argument is the user object to encode into the JWT.
+* 
+*/
+let generateJWTToken = (user) => {
     return jwt.sign(user, jwtSecret, {
         subject: user.Username,
         expiresIn: '7d',
         algorithm: 'HS256'
     });
- }
+}
 
- /* POST login. */
- module.exports = (router) => {
+/**
+ * 
+ * @param {*} router
+ * This function is responsible for authenticating users.
+ * It uses the passport.authenticate() method, passing in the local strategy and a callback function. 
+ */
+/* POST login. */
+module.exports = (router) => {
     router.post('/login', (req, res) => {
         passport.authenticate('local', { session: false }, (error, user, info) => {
             if (error || !user) {
@@ -32,4 +46,4 @@ const jwt = require('jsonwebtoken'),
             });
         })(req, res);
     });
- }
+}
