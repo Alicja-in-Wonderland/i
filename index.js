@@ -303,7 +303,7 @@ app.delete('/users/:Username', passport.authenticate('jwt', { session: false }),
             if (!user) {
                 res.status(400).send(req.params.Username + ' was not found.');
             } else {
-                res.status(200).send(req.params.Username + ' was deleted.');
+                res.json(req.params.Username);
             }
         })
         .catch((err) => {
