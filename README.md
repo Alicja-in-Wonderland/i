@@ -1,7 +1,9 @@
 # movie_api
 Movie API is a backend server application that provides a RESTful API for accessing movie data and managing user accounts.
 
-The app utilises MERN (MongoDB, Express, React, and Node.js) tech stack.
+## Tech Stack:
+- Server Logic: written with Node/Express; hosted on Heroku
+- Database: MongoDB for users and movies; stored in MongoDB Cloud
 
 ## To setup the application:
 
